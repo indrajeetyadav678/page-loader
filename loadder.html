@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loader</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+
+        #img1 {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            /* margin-top: 40vh; */
+            /* margin-left: 40%; */
+            position: absolute;
+            top:40vh;
+            left:40%;
+        }
+
+        #cap {
+            width: 174px;
+            height: 25px;
+            border: 1px solid rgb(21, 21, 36);
+            /* background-color: beige; */
+            color: black;
+            /* font-size:30px */
+            text-align: center;
+        }
+
+        input {
+            width:300px;
+            height: 35px;
+            padding-left: 10px;
+        }
+
+        #ref {
+            /* width:200px;
+            height:25px; */
+            border: 1px solid rgb(43, 41, 41);
+            padding: 5px 8px;
+        }
+
+        #div1 {
+            width: 100%;
+            height:100vh;
+            padding-left: 36%;
+            padding-top: 30vh;
+            display: none;
+        }
+
+        #login1{
+            width: 80px;
+            height:30px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body onload="show(), captcha()">
+    <img src="https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg"
+        alt="fsdfsf" id="img1">
+
+
+    <div id="div1">
+        <form>
+            <input type="text" placeholder="Username" id="username"><br><br>
+            <input type="password" placeholder="Password" id="password"><br><br>
+            <div id="cap"></div><br>
+            <input type="text" placeholder="Enter captcha" id="captcha1">
+            <label onclick="captcha()" id="ref">Refresh</label><br><br>
+            <button onclick="return login()" id="login1">login</button>
+        </form>
+        
+    </div>
+
+    <script>
+        let output= "";
+        function login() {
+            let dbusername = "admin@gmail.com";
+            let dbpass = "123456";
+            let loginid = document.getElementById('username').value;
+            let pass = document.getElementById('password').value;
+            let encaptcha = document.getElementById('captcha1').value;
+            if (dbusername === loginid && dbpass === pass && encaptcha === output) {
+                window.open("../photo-gallary.html");
+                // window.location.href = "../photo-gallary.html";
+                // return false;
+            }
+
+            else {
+                window.alert("username and password does not exist please register");
+                return false;
+            }
+            // return false;
+        }
+
+        function captcha() {
+            output = '';
+            let store = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            for (let i = 0; i < 6; i++) {
+                let len = store.length;
+                let a = Math.random();
+                let randomcombination = len * a;
+                let b = Math.floor(randomcombination);
+
+                // console.log(a);
+                // console.log(len);
+                // console.log(randomcombination);
+                // console.log(b);
+                // console.log(store.charAt(b))
+                output = output + store.charAt(b)
+            }
+            // console.log(output)
+            // document.write(output)
+            document.getElementById('cap').innerHTML = output;
+        }
+    </script>
+
+    <script>
+        function show(){
+            setTimeout(loader, 2000);
+            function loader(){
+                document.querySelector('#img1').style.display = "none";
+                document.querySelector('#div1').style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
